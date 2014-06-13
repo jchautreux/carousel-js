@@ -1,0 +1,109 @@
+body {
+    font-family: Arial;
+    font-size:  12px;
+}
+
+form, 
+.overview,
+#carousel,
+code {
+    display:  inline-block;
+    vertical-align: top;
+    *zoom: 1;
+    *display: inline;
+}
+
+form {
+    width:  350px;
+}
+
+label {
+    display:    inline-block;
+    vertical-align: middle;
+    width:      150px;
+}
+
+select {
+    width:      190px;
+}
+
+input {
+    width:      50px;
+}
+
+a img {
+    border:     none;
+}
+
+/*----------------------*/
+/*       Carousel       */
+/*----------------------*/
+#carousel {
+    width:      500px;
+    margin-right: 20px;
+}
+
+.carousel_elements {
+    height:     350px;
+}
+
+.shortcut,
+.thumbnail {
+    text-align: center;
+    padding-top:    5px;
+}
+
+.shortcut a,
+.thumbnail a {
+    display:    inline-block;
+    margin:     0 5px;
+    position:   relative;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+.shortcut a {
+    color:      #999;
+    height:     20px;
+    width:      20px;
+}
+
+.shortcut a.current {
+    background: #999;
+    color:      #fff;
+}
+
+.thumbnail a img {
+    height:     50px;
+}
+
+.thumbnail a.current:after {
+    background: rgba(190, 190, 190, 0.8);
+    content:    '';
+    height:     50px;
+    left:       0;
+    position:   absolute;
+    top:        0;
+    width:      100%;
+}
+
+/*----------------------*/
+/*          Code        */
+/*----------------------*/
+code {
+    border:     1px solid #333;
+    font-family: monospace;
+    height:     310px;
+    min-width:  310px;
+    padding:    20px;
+}
+
+code ul {
+    list-style: none;
+    margin:     0;
+    padding:    0;
+}
+
+code ul ul {
+    padding:    0 0 0 20px;
+}

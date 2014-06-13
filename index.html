@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link media="all" href="libs/carousel.css" type="text/css" rel="stylesheet" />
+        <link media="all" href="libs/main.css" type="text/css" rel="stylesheet" />
+         <script src="libs/jquery-1.6.1.min.js" type="text/javascript" charset="utf-8"></script> 
+        <script type="text/javascript" src="libs/carousel.js"> </script>
+        <title>Test du carousel</title>
+    </head>
+    <body>
+        <form onsumbit="return false;">
+            <label>Temps de pause (ms)</label>
+            <input type="number" name="pause" value="2000" />
+            <label>Effet</label>
+            <select name="effect">
+                <option value="base">Sans</option>
+                <option value="slide">Slide</option>
+                <option value="slideHover">SlideHover</option>
+                <option value="swing">Swing</option>
+                <option value="fade">Fade</option>
+                <option value="fadeHover">FadeHover</option>
+            </select>
+            <label>Direction de l'effet</label>
+            <select name="orientation">
+                <option value="right">Vers la droite</option>
+                <option value="left">Vers la gauche</option>
+                <option value="top">Vers le haut</option>
+                <option value="bottom">Vers le bas</option>
+            </select>
+            <label>Temps de l'effet (ms)</label>
+            <input type="number" name="duration" value="500" />
+            <label>Sens de lecture</label>
+            <select name="direction">
+                <option value="forward">En avant</option>
+                <option value="backward">En arrière</option>
+            </select>
+            <label>Navigation</label>
+            <select name="navigation">
+                <option value="none">Sans</option>
+                <option value="shortcut">Raccourci numérique</option>
+                <option value="thumbnail">Raccourci vignette</option>
+                <option value="closest">Suivant / Précédent</option>
+            </select>
+        </form>
+        <div class="overview">
+            <div id="carousel">
+                <img src="./img/img1.jpg" />
+                <img src="./img/img2.jpg" />
+                <img src="./img/img3.jpg" />
+                <img src="./img/img4.jpg" />
+                <img src="./img/img5.jpg" />
+                <img src="./img/img6.jpg" />
+            </div>
+            <code id="your-code">
+            </code>
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                function refresh_carousel() {
+                    var fields = $('form').serializeArray(),
+                        config = {
+                            effect: {
+                                type: 'base',
+                                params: {
+                                    pause: 2000
+                                }
+                            },
+                            navigation: {
+                                type:   'none'
+                            }
+                        };
+                    
+                    jQuery.each(fields, function(i, field){
+                        switch(field.name)
+                        {
+                            case 'effect':
+                                config.effect.type = field.value;
+                                break;
+                            case 'pause':
+                                config.effect.params.pause = field.value;
+                                break;
+                            case 'duration':
+                                config.effect.params.duration = field.value;
+                                break;
+                            case 'orientation':
+                                config.effect.params.direction = field.value;
+                                break;
+//                            case 'direction':
+//                                config.direction = field.value;
+//                                break;
+                            case 'navigation':
+                                config.navigation.type = field.value;
+                                break;
+                        }
+                    });
+                    
+                    if( window.testCarousel )
+                        window.testCarousel.destroy(true);
+                    
+                    $('#your-code').html(generateCode(config, 0));
+                    
+                    window.testCarousel = $('#carousel').setCarousel(config);
+                    
+                }
+                
+                function generateCode(config, level)
+                {
+                    var txt = '<ul>',
+                        i = 0,
+                        j = 0;
+                        
+                    if( level == 0 )
+                        txt += '<li>var config = {<ul>'; 
+                        
+                    for(name in config)
+                        j++;
+                        
+                    for(name in config)
+                    {
+                        txt += '<li>' + name + ': ';
+                        txt += ( typeof(config[name]) == 'object' ) ? '{' + generateCode(config[name], level+1) + '}' : config[name];
+                        if( i++ < j-1 )
+                            txt += ',';
+                        txt += '</li>';
+                    }
+                    
+                    if( level == 0 )
+                    {
+                        txt += '</ul>};</li>'; 
+                        txt += '<li>$("#myCarousel").setCarousel(config);</li>';
+                    }
+                    
+                    return txt + '</ul>';
+                }
+                
+                
+                $('form').change(function(){
+                    refresh_carousel();
+                });
+                
+                refresh_carousel();
+            });
+        </script>
+    </body>
+</html>
