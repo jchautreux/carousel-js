@@ -1,0 +1,19 @@
+{
+  "name": "jhx-carousel-js",
+  "version": "1.0.0",
+  "homepage": "https://github.com/jchautreux/carousel-js",
+  "authors": [
+    "Jean-Christophe HAUTREUX <jchautreux@prestaconcept.net>"
+  ],
+  "description": "a javascript carousel usable with prototype, jQuery or standAlone",
+  "main": "libs/carousel.js",
+  "keywords": [
+    "carousel",
+    "javascript",
+    "js",
+    "jQuery",
+    "prototype",
+    "vanilla"
+  ],
+  "license": "MIT"
+}
